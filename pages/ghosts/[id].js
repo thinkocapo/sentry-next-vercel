@@ -1,5 +1,5 @@
 function Post() {
-    return <div>Posts dynamic route</div>
+    return <div>Ghosts dynamic route</div>
   }
   
   export default Post
