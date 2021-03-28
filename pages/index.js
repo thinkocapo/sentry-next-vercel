@@ -27,10 +27,10 @@ export default function Home() {
         <h1>
           Read{' '}
           <Link href="/posts/first-post">
-            <a>this page!</a>
+            <a>First Post!</a>
           </Link>
           </h1>
-          
+
           <a
             href="https://github.com/vercel/next.js/tree/master/examples"
             className="card"
