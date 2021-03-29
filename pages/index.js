@@ -2,9 +2,28 @@ import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 
-export default function Home() {
+import { getSortedPostsData } from '../lib/posts'
+
+/*
+(SSG)     automatically generated as static HTML + JSON (uses getStaticProps)
+Can only be executed from a page
+One of the reasons for this restriction is that React needs to have all the required data before the page is rendered.
+Only runs on server side. Runs on every request in Dev (npm run dev) and only at build time in Production (npm run build)
+*/
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData()
+  return {
+    props: {
+      allPostsData
+    }
+  }
+}
+
+// allPostsData accessible here because of the getStaticProps above (it applie sto this this Home component)
+export default function Home({ allPostsData }) {
   return (
     <Layout home>
+      {/* Keep the existing code here */}
       <Head>
         <title>{siteTitle}</title>
       </Head>
@@ -14,6 +33,21 @@ export default function Home() {
           (This is a sample website - you’ll be building a site like this on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
+      </section>
+      {/* Add this <section> tag below the existing <section> tag */}
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <ul className={utilStyles.list}>
+          {allPostsData.map(({ id, date, title }) => (
+            <li className={utilStyles.listItem} key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          ))}
+        </ul>
       </section>
     </Layout>
   )
