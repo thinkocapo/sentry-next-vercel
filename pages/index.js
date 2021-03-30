@@ -23,6 +23,11 @@ export async function getStaticProps() {
   }
 }
 
+/*
+Pages that use Static Generation and assets (JS, CSS, images, fonts, etc) will automatically be served from the Vercel Edge Network, which is blazingly fast.
+Pages that use Server-Side Rendering and API routes will automatically become isolated Serverless Functions. 
+This allows page rendering and API requests to scale infinitely.
+*/
 // allPostsData accessible here because of the getStaticProps above (it applie sto this this Home component)
 export default function Home({ allPostsData }) {
   return (
